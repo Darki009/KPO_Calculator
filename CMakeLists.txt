@@ -12,17 +12,16 @@ find_package(Qt6 COMPONENTS
         Core
         Gui
         Widgets
+        Qml
         REQUIRED)
 
-add_executable(${PROJECT_NAME} main.cpp
-        design/mainwindow/mainwindow.cpp
-        design/mainwindow/mainwindow.h
-        design/mainwindow/mainwindow.ui)
+add_executable(${PROJECT_NAME} main.cpp)
 
 target_link_libraries(${PROJECT_NAME}
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        Qt::Qml
 )
 
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
