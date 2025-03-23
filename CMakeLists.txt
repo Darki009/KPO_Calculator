@@ -15,7 +15,10 @@ find_package(Qt6 COMPONENTS
         Qml
         REQUIRED)
 
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp
+        calculator-logic/Calculator.cpp
+        calculator-logic/Calculator.h
+        calculator-logic/Calculator.h)
 
 target_link_libraries(${PROJECT_NAME}
         Qt::Core
