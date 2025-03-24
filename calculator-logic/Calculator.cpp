@@ -22,11 +22,11 @@ double Calculator::calculateExpr() {
     if (expression == ""){
         return 0;
     }
-    if (expression[0] != '('){
-        std::string formatedString = "(.)";
-        formatedString.replace(1,1,expression);
-        expression = formatedString;
-    }
+
+    std::string formatedString = "(.)";
+    formatedString.replace(1,1,expression);
+    expression = formatedString;
+
     calculateBrackets(0);
     return std::stod(expression);
 }
