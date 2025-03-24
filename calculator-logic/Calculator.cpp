@@ -1,13 +1,17 @@
 #include "Calculator.h"
 
 bool Calculator::isCanBePlacedInExpression(std::string expr, char charToPlace) {
-    int length = expr.size();
+    int lastChar = expr.size() - 1;
 
-    if (equalOneOfArray(expr[length]) && equalOneOfArray(charToPlace)) {
+    if (expr == "" && (charToPlace == '.' || charToPlace == '/' || charToPlace == '*' || charToPlace == ')')){
         return false;
     }
 
-    if (expr[length] == '(' && (charToPlace == '*' || charToPlace == '/')) {
+    if (equalOneOfOperations(expr[lastChar]) && equalOneOfOperations(charToPlace)) {
+        return false;
+    }
+
+    if (expr[lastChar] == '(' && (charToPlace == '*' || charToPlace == '/')) {
         return false;
     }
 
@@ -35,7 +39,7 @@ void Calculator::calculateBrackets(int firstBracketPos) {
     for (int i = firstBracketPos + 1; i < expression.size() + 1; i++) {
 
 
-        if (equalOneOfArray(expression[i]) || expression[i] == ')' || expression[i] == '\0') {
+        if (equalOneOfOperations(expression[i]) || expression[i] == ')' || expression[i] == '\0') {
             if (i - leftEnd != 0) {
                 numbers.push(std::stod(expression.substr(leftEnd, i - leftEnd)));
                 leftEnd=i + 1;
@@ -95,7 +99,7 @@ void Calculator::calculateBrackets(int firstBracketPos) {
     }
 }
 
-bool Calculator::equalOneOfArray(char compare) {
+bool Calculator::equalOneOfOperations(char compare) {
     for (char operation : supportedOperations)
         if (compare == operation)
             return true;

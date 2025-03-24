@@ -10,6 +10,24 @@
     <height>651</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>452</width>
+    <height>651</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>452</width>
+    <height>651</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Calculator</string>
   </property>
@@ -18,7 +36,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb( 0, 0, 0);
-</string>
+color: black;</string>
   </property>
   <widget class="QTextEdit" name="textEdit">
    <property name="geometry">
@@ -37,11 +55,19 @@
    <property name="mouseTracking">
     <bool>true</bool>
    </property>
+   <property name="focusPolicy">
+    <enum>Qt::FocusPolicy::NoFocus</enum>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
+   </property>
+   <property name="acceptDrops">
+    <bool>false</bool>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgba(255, 255, 255, 220);
  border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 3px;</string>
    </property>
    <property name="inputMethodHints">
@@ -58,7 +84,7 @@ hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:24pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p align=&quot;right&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="acceptRichText">
     <bool>false</bool>
@@ -93,7 +119,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -125,7 +150,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -157,7 +181,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -189,7 +212,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -221,7 +243,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -253,7 +274,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -285,7 +305,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -317,7 +336,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -349,7 +367,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -381,7 +398,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -413,7 +429,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -445,7 +460,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -477,7 +491,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -509,7 +522,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -541,7 +553,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -573,7 +584,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -582,10 +592,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string/>
-      </property>
-      <property name="icon">
-       <iconset theme="document-revert"/>
+       <string>&lt;-</string>
       </property>
       <property name="iconSize">
        <size>
@@ -614,7 +621,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -646,7 +652,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -678,7 +683,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {
@@ -710,7 +714,6 @@ QPushButton:pressed {
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
-    border-color: biege;
     padding: 6px;
 }
 QPushButton:pressed {

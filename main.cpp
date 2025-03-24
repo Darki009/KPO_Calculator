@@ -1,11 +1,14 @@
-#include <iostream>
-#include "calculator-logic/Calculator.h"
+#include "design/maintheme.h"
+#include <QApplication>
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::string sheet = "2*5-6*9-(9-2*(9+35)/78)+51+3";
-    Calculator calc = Calculator();
-    calc.setExpr(sheet);
-    std::cout << calc.calculateExpr();
-    return 0;
+    QApplication app(argc, argv);
+
+    mainTheme window;
+
+    window.show();
+
+    return QApplication::exec();
+
 }

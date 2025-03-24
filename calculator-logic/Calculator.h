@@ -21,7 +21,7 @@ public:
     static bool isCanBePlacedInExpression(std::string expr, char charToPlace);
     double calculateExpr();
 
-    static bool equalOneOfArray(char compare);
+    static bool equalOneOfOperations(char compare);
 };
 
 
