@@ -4,9 +4,10 @@
 
 #define ARRAY_LENGTH 4
 
+
+static std::array<char, ARRAY_LENGTH> supportedOperations{'+', '-', '*', '/'};
 class Calculator {
 private:
-    std::array<char, ARRAY_LENGTH> supportedOperations{'+', '-', '*', '/'};
     std::string expression;
 
     void calculateBrackets(int firstBracketPos);
@@ -17,10 +18,10 @@ public:
 
     inline void clearExpr() { expression = ""; };
 
-    bool checkExpr();
+    static bool isCanBePlacedInExpression(std::string expr, char charToPlace);
     double calculateExpr();
 
-    bool equalOneOfArray(char compare);
+    static bool equalOneOfArray(char compare);
 };
 
 

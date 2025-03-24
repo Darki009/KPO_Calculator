@@ -1,7 +1,17 @@
 #include "Calculator.h"
 
-bool Calculator::checkExpr() {
+bool Calculator::isCanBePlacedInExpression(std::string expr, char charToPlace) {
+    int length = expr.size();
 
+    if (equalOneOfArray(expr[length]) && equalOneOfArray(charToPlace)) {
+        return false;
+    }
+
+    if (expr[length] == '(' && (charToPlace == '*' || charToPlace == '/')) {
+        return false;
+    }
+
+    return true;
 }
 
 double Calculator::calculateExpr() {
@@ -19,18 +29,16 @@ double Calculator::calculateExpr() {
 
 void Calculator::calculateBrackets(int firstBracketPos) {
 
-    std::stack<int> leftEnd;
-    leftEnd.push(firstBracketPos + 1);
+     int leftEnd=firstBracketPos + 1;
     std::stack<double> numbers{};
     std::stack<char> operations{};
     for (int i = firstBracketPos + 1; i < expression.size() + 1; i++) {
 
 
         if (equalOneOfArray(expression[i]) || expression[i] == ')' || expression[i] == '\0') {
-            if (i - leftEnd.top() != 0) {
-                numbers.push(std::stod(expression.substr(leftEnd.top(), i - leftEnd.top())));
-                leftEnd.pop();
-                leftEnd.push(i + 1);
+            if (i - leftEnd != 0) {
+                numbers.push(std::stod(expression.substr(leftEnd, i - leftEnd)));
+                leftEnd=i + 1;
             }
 
             if (!operations.empty()) {
@@ -63,15 +71,14 @@ void Calculator::calculateBrackets(int firstBracketPos) {
             }
 
             if (expression[i] == '+' || expression[i] == '-' ) {
-                leftEnd.pop();
-                leftEnd.push(i);
+                leftEnd=i;
             }
 
         }
 
         if (expression[i] == '(') {
             calculateBrackets(i);
-            i = leftEnd.top();
+            i = leftEnd;
         }
 
 
@@ -87,7 +94,6 @@ void Calculator::calculateBrackets(int firstBracketPos) {
         }
     }
 }
-
 
 bool Calculator::equalOneOfArray(char compare) {
     for (char operation : supportedOperations)
