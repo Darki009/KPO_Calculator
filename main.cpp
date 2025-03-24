@@ -3,7 +3,7 @@
 
 int main()
 {
-    std::string sheet = "10+7-6*4/8-78";
+    std::string sheet = "(2*5-6*9-(9-2*(9+35)/78)+51)";
     Calculator calc = Calculator();
     calc.setExpr(sheet);
     std::cout << calc.calculateExpr();

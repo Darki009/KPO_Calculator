@@ -6,18 +6,18 @@
 
 class Calculator {
 private:
-    std::string expression;
     std::array<char, ARRAY_LENGTH> supportedOperations{'+', '-', '*', '/'};
+    std::string expression;
 
-
+    void calculateBrackets(int firstBracketPos);
 public:
-    Calculator() {expression = "";};
 
+    Calculator() {expression = "";};
     inline void setExpr(const std::string& expr) { expression = expr; };
+
     inline void clearExpr() { expression = ""; };
 
-    bool checkExpr(std::string expr);
-
+    bool checkExpr();
     double calculateExpr();
 
     bool equalOneOfArray(char compare);
