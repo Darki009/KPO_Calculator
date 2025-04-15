@@ -1,5 +1,6 @@
 #include "maintheme.h"
 #include "ui_mainTheme.h"
+#include <QRegularExpression>
 
 mainTheme::mainTheme(QWidget *parent) :
         QWidget(parent), ui(new Ui::mainTheme) {
@@ -53,12 +54,31 @@ void mainTheme::clear() {
 
 void mainTheme::expressionEqual() {
     try {
-        calculator.setExpr(ui->textEdit->toPlainText().toStdString());
-        QString buf;
-        ui->textEdit->setText(buf.setNum(calculator.calculateExpr(), 'g', 6));
+        QString input = ui->textEdit->toPlainText().trimmed();
+
+        if (input.isEmpty()) {
+            ui->textEdit->setText("0");
+            return;
+        }
+
+        calculator.setExpr(input.toStdString());
+
+        double result = calculator.calculateExpr();
+
+        QString output;
+        if (result == std::floor(result)) {
+            output = QString::number(static_cast<long long>(result));
+        } else {
+            output = QString::number(result, 'f', 9).replace(QRegularExpression("\\.?0+$"), "");
+        }
+
+        ui->textEdit->setText(output);
     }
-    catch (...){
-        ui->textEdit->setText("Error");
+    catch (const std::exception& e) {
+        ui->textEdit->setText("Error: " + QString(e.what()));
+    }
+    catch (...) {
+        ui->textEdit->setText("Calculation error");
     }
 }
 
