@@ -14,6 +14,8 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
+qt_add_resources(RESOURCES resources/res.qrc)
+
 add_executable(${PROJECT_NAME} main.cpp
         calculator-logic/Calculator.cpp
         calculator-logic/Calculator.h
@@ -21,9 +23,7 @@ add_executable(${PROJECT_NAME} main.cpp
         design/maintheme.cpp
         design/maintheme.h
         design/maintheme.ui
-        design/test.cpp
-        design/test.h
-        design/test.ui)
+)
 
 target_link_libraries(${PROJECT_NAME}
         Qt::Core

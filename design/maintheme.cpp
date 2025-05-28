@@ -1,6 +1,7 @@
 #include "maintheme.h"
 #include "ui_mainTheme.h"
 #include <QRegularExpression>
+#include <QPushButton>
 
 mainTheme::mainTheme(QWidget *parent) :
         QWidget(parent), ui(new Ui::mainTheme) {
@@ -16,20 +17,19 @@ mainTheme::mainTheme(QWidget *parent) :
         if (button)
             connect(button, SIGNAL(clicked()), this, SLOT(addSymbol()));
     }
-
-
     for (const QString& buttonName : signButtons) {
         auto* button = findChild<QPushButton*>(buttonName);
         if (button)
             connect(button, SIGNAL(clicked()), this, SLOT(addSymbol()));
     }
 
+    connect(ui->changeTheme, &QPushButton::clicked, this, &mainTheme::changeThemeSlot);
+    applyDarkTheme();
 }
 
 mainTheme::~mainTheme() {
     delete ui;
 }
-
 
 void mainTheme::addSymbol() {
     if (ui->textEdit->toPlainText() == "Error" || ui->textEdit->toPlainText() == "inf") {
@@ -37,13 +37,13 @@ void mainTheme::addSymbol() {
     }
 
     auto* button = dynamic_cast<QPushButton *>(QObject::sender());
-        if (button){
-            if (Calculator::isCanBePlacedInExpression (
-                    ui->textEdit->toPlainText().toStdString(),
-                    button->text().toStdString().c_str()[0])) {
-                ui->textEdit->setText(ui->textEdit->toPlainText() + button->text());
-            }
+    if (button){
+        if (Calculator::isCanBePlacedInExpression (
+                ui->textEdit->toPlainText().toStdString(),
+                button->text().toStdString().c_str()[0])) {
+            ui->textEdit->setText(ui->textEdit->toPlainText() + button->text());
         }
+    }
 
 }
 
@@ -88,4 +88,78 @@ void mainTheme::deleteLastSymbol() {
         text.chop(1);
         ui->textEdit->setText(text);
     }
+}
+void mainTheme::changeThemeSlot() {
+    darkTheme = !darkTheme;
+    if (darkTheme) {
+        applyDarkTheme();
+    } else {
+        applyLightTheme();
+    }
+}
+
+void mainTheme::applyDarkTheme() {
+    // Восстановить исходные значения из .ui
+    this->setStyleSheet("background-color: rgb(0, 0, 0); color: black;");
+    ui->textEdit->setStyleSheet("background-color: rgba(255, 255, 255, 220); border-width: 2px; border-radius: 10px; padding: 3px; color: black;");
+
+    // Кнопки с оранжевым
+    QString orange =
+            "QPushButton { background-color: rgba(255, 128, 0, 200); border-style: outset; border-width: 2px; border-radius: 10px; padding: 6px; }"
+            "QPushButton:pressed { background-color: rgba(193, 94, 0, 200); border-style: inset; }";
+    // Кнопки с белым
+    QString white =
+            "QPushButton { background-color: rgba(255, 255, 255, 200); border-style: outset; border-width: 2px; border-radius: 10px; padding: 6px; }"
+            "QPushButton:pressed { background-color: rgba(215, 215, 215, 200); border-style: inset; }";
+
+    // Кнопки
+    QList<QString> orangeButtons = {"plusButton", "minusButton", "multiplyButton", "divButton",
+                                    "leftBracketButton", "rigthBracketButton", "clearAllButton", "deleteLastButton", "equalButton"};
+    for (const QString& name : orangeButtons) {
+        QPushButton* btn = findChild<QPushButton*>(name);
+        if (btn) btn->setStyleSheet(orange);
+    }
+    // Числа и точка
+    for (int i = 0; i <= 9; ++i) {
+        QPushButton* btn = findChild<QPushButton*>(QString("button%1").arg(i));
+        if (btn) btn->setStyleSheet(white);
+    }
+    QPushButton* btnPoint = findChild<QPushButton*>("buttonPoint");
+    if (btnPoint) btnPoint->setStyleSheet(white);
+
+    // Кнопка смены темы — иконка светлая
+    ui->changeTheme->setStyleSheet(white);
+    ui->changeTheme->setIcon(QIcon(":/icons/switchToLight.ico"));
+}
+
+void mainTheme::applyLightTheme() {
+    // Светлая адаптация
+    this->setStyleSheet("background-color: rgb(245,245,245); color: #222;");
+    ui->textEdit->setStyleSheet("background-color: #fff; color: #222; border: 2px solid #bbb; border-radius: 10px; padding: 3px;");
+
+    // Светлая оранжевая кнопка
+    QString orange =
+            "QPushButton { background-color: #ffd180; color: #222; border-style: outset; border-width: 2px; border-radius: 10px; padding: 6px; }"
+            "QPushButton:pressed { background-color: #ffb300; border-style: inset; }";
+    // Светлая обычная кнопка
+    QString white =
+            "QPushButton { background-color: #f5f5f5; color: #222; border-style: outset; border-width: 2px; border-radius: 10px; padding: 6px; }"
+            "QPushButton:pressed { background-color: #e0e0e0; border-style: inset; }";
+
+    QList<QString> orangeButtons = {"plusButton", "minusButton", "multiplyButton", "divButton",
+                                    "leftBracketButton", "rigthBracketButton", "clearAllButton", "deleteLastButton", "equalButton"};
+    for (const QString& name : orangeButtons) {
+        QPushButton* btn = findChild<QPushButton*>(name);
+        if (btn) btn->setStyleSheet(orange);
+    }
+    for (int i = 0; i <= 9; ++i) {
+        QPushButton* btn = findChild<QPushButton*>(QString("button%1").arg(i));
+        if (btn) btn->setStyleSheet(white);
+    }
+    QPushButton* btnPoint = findChild<QPushButton*>("buttonPoint");
+    if (btnPoint) btnPoint->setStyleSheet(white);
+
+    // Кнопка смены темы — иконка тёмная
+    ui->changeTheme->setStyleSheet(white);
+    ui->changeTheme->setIcon(QIcon(":/icons/switchToDark.ico"));
 }
