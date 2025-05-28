@@ -6,7 +6,6 @@
 #include <cmath>
 #include <stdexcept>
 
-// Базовый класс для операции (оставляем как было)
 class Operation {
 public:
     virtual ~Operation() = default;
@@ -15,7 +14,6 @@ public:
     virtual int getPriority() const = 0;
 };
 
-// Конкретные операции (оставляем как было)
 class AddOperation : public Operation {
 public:
     double execute(double a, double b) const override { return a + b; }

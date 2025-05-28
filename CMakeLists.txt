@@ -20,7 +20,10 @@ add_executable(${PROJECT_NAME} main.cpp
         calculator-logic/Calculator.h
         design/maintheme.cpp
         design/maintheme.h
-        design/maintheme.ui)
+        design/maintheme.ui
+        design/test.cpp
+        design/test.h
+        design/test.ui)
 
 target_link_libraries(${PROJECT_NAME}
         Qt::Core
