@@ -1,5 +1,6 @@
 #include <QWidget>
 #include <QIcon>
+#include <QSettings> // добавлено
 #include "../calculator-logic/Calculator.h"
 
 QT_BEGIN_NAMESPACE
@@ -21,11 +22,13 @@ private slots:
     void clear();
     void expressionEqual();
     void deleteLastSymbol();
-    void changeThemeSlot(); // Новый слот
+    void changeThemeSlot();
 
 private:
-    void applyDarkTheme();  // Исходные значения
-    void applyLightTheme(); // Светлая адаптация
+    void applyDarkTheme();
+    void applyLightTheme();
+    void loadThemeFromConfig();    // добавлено
+    void saveThemeToConfig();      // добавлено
 
     Ui::mainTheme *ui;
     Calculator calculator;

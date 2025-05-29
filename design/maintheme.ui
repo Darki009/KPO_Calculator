@@ -592,7 +592,7 @@ QPushButton:pressed {
 }</string>
       </property>
       <property name="text">
-       <string>&lt;-</string>
+       <string/>
       </property>
       <property name="iconSize">
        <size>
@@ -763,10 +763,6 @@ QPushButton:pressed {
    </property>
    <property name="text">
     <string/>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>C:/Users/darki/Downloads/switchToLight.ico</normaloff>C:/Users/darki/Downloads/switchToLight.ico</iconset>
    </property>
    <property name="iconSize">
     <size>

@@ -2,6 +2,7 @@
 #include "ui_mainTheme.h"
 #include <QRegularExpression>
 #include <QPushButton>
+#include <QSettings> // добавлено
 
 mainTheme::mainTheme(QWidget *parent) :
         QWidget(parent), ui(new Ui::mainTheme) {
@@ -22,9 +23,18 @@ mainTheme::mainTheme(QWidget *parent) :
         if (button)
             connect(button, SIGNAL(clicked()), this, SLOT(addSymbol()));
     }
+    ui->deleteLastButton->setIcon(QIcon(":/icons/back.png"));
+    ui->deleteLastButton->setIconSize(QSize(32, 32));
 
     connect(ui->changeTheme, &QPushButton::clicked, this, &mainTheme::changeThemeSlot);
-    applyDarkTheme();
+
+    loadThemeFromConfig(); // загружаем тему из конфига
+
+    if (darkTheme) {
+        applyDarkTheme();
+    } else {
+        applyLightTheme();
+    }
 }
 
 mainTheme::~mainTheme() {
@@ -96,6 +106,7 @@ void mainTheme::changeThemeSlot() {
     } else {
         applyLightTheme();
     }
+    saveThemeToConfig(); // сохраняем тему в конфиг
 }
 
 void mainTheme::applyDarkTheme() {
@@ -124,12 +135,9 @@ void mainTheme::applyDarkTheme() {
         QPushButton* btn = findChild<QPushButton*>(QString("button%1").arg(i));
         if (btn) btn->setStyleSheet(white);
     }
-    QPushButton* btnPoint = findChild<QPushButton*>("buttonPoint");
-    if (btnPoint) btnPoint->setStyleSheet(white);
 
-    // Кнопка смены темы — иконка светлая
-    ui->changeTheme->setStyleSheet(white);
-    ui->changeTheme->setIcon(QIcon(":/icons/switchToLight.ico"));
+    ui->changeTheme->setIcon(QIcon(":/icons/switchToLight.png"));
+    ui->changeTheme->setIconSize(QSize(32, 32));
 }
 
 void mainTheme::applyLightTheme() {
@@ -156,10 +164,20 @@ void mainTheme::applyLightTheme() {
         QPushButton* btn = findChild<QPushButton*>(QString("button%1").arg(i));
         if (btn) btn->setStyleSheet(white);
     }
-    QPushButton* btnPoint = findChild<QPushButton*>("buttonPoint");
-    if (btnPoint) btnPoint->setStyleSheet(white);
 
-    // Кнопка смены темы — иконка тёмная
-    ui->changeTheme->setStyleSheet(white);
-    ui->changeTheme->setIcon(QIcon(":/icons/switchToDark.ico"));
+
+    ui->changeTheme->setIcon(QIcon(":/icons/switchToDark.png"));
+    ui->changeTheme->setIconSize(QSize(32, 32));
+}
+
+// --- Новые методы ---
+
+void mainTheme::loadThemeFromConfig() {
+    QSettings settings("MyCompany", "CalculatorApp");
+    darkTheme = settings.value("theme/dark", true).toBool();
+}
+
+void mainTheme::saveThemeToConfig() {
+    QSettings settings("MyCompany", "CalculatorApp");
+    settings.setValue("theme/dark", darkTheme);
 }

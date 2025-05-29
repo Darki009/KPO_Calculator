@@ -23,6 +23,7 @@ add_executable(${PROJECT_NAME} main.cpp
         design/maintheme.cpp
         design/maintheme.h
         design/maintheme.ui
+        ${RESOURCES}
 )
 
 target_link_libraries(${PROJECT_NAME}

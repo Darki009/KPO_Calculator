@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/icons">
-        <file>icons/switchToDark.ico</file>
-        <file>icons/switchToLight.ico</file>
-    </qresource>
-</RCC>
