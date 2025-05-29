@@ -1,5 +1,14 @@
 #include "Calculator.h"
 
+// Убедитесь, что здесь нет определений классов Operation, AddOperation и т.д.
+
+Calculator::Calculator() {
+    supportedOperations.push_back(std::make_unique<AddOperation>());
+    supportedOperations.push_back(std::make_unique<SubtractOperation>());
+    supportedOperations.push_back(std::make_unique<MultiplyOperation>());
+    supportedOperations.push_back(std::make_unique<DivideOperation>());
+}
+
 bool Calculator::isCanBePlacedInExpression(std::string expr, char charToPlace) {
     int lastChar = expr.size() - 1;
 
@@ -103,3 +112,4 @@ void Calculator::calculateBrackets(size_t firstBracketPos) {
         }
     }
 }
+

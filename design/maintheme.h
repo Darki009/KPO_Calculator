@@ -1,4 +1,6 @@
+#include <QtCore>
 #include <QWidget>
+
 #include "../calculator-logic/Calculator.h"
 
 QT_BEGIN_NAMESPACE

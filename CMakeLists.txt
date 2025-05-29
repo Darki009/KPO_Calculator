@@ -14,10 +14,20 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
+# Статическая библиотека с операциями
+add_library(calc_operations STATIC
+    calculator-logic/Operation.h
+    calculator-logic/Operation.cpp
+)
+
+# Динамическая библиотека с калькулятором
+add_library(calc_core SHARED
+    calculator-logic/Calculator.h
+    calculator-logic/Calculator.cpp
+)
+target_link_libraries(calc_core PRIVATE calc_operations)
+
 add_executable(${PROJECT_NAME} main.cpp
-        calculator-logic/Calculator.cpp
-        calculator-logic/Calculator.h
-        calculator-logic/Calculator.h
         design/maintheme.cpp
         design/maintheme.h
         design/maintheme.ui)
@@ -26,6 +36,7 @@ target_link_libraries(${PROJECT_NAME}
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        calc_core
 )
 
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
